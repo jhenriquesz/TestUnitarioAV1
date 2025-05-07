@@ -6,16 +6,16 @@ public class Venda {
     private double totalVenda;
 
     public Venda(Produto produto, int quantidadeVendida) {
+        if (quantidadeVendida < 0) {
+            throw new IllegalArgumentException("Quantidade vendida não pode ser negativa");
+        }
+
         this.produto = produto;
         this.quantidadeVendida = quantidadeVendida;
     }
 
     public boolean realizarVenda() {
         if (produto == null) {
-            throw new NullPointerException("Produto não pode ser nulo");
-        }
-
-        if (quantidadeVendida <= 0) {
             return false;
         }
 
@@ -23,11 +23,8 @@ public class Venda {
             totalVenda = produto.getPreco() * quantidadeVendida;
             return true;
         }
-
         return false;
     }
-
-
 
     public double getTotalVenda() {
         return totalVenda;
